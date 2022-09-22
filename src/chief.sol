@@ -162,7 +162,7 @@ contract DSChiefApprovals is DSThing {
 
 //add interface SpellRegist
 interface SpellRegist{
-    function isValid(address spell) external returns(bool);
+    function isAuthSpell(address spell) external view returns(bool);
 }
 
 // `hat` address is unique root user (has every role) and the
@@ -195,7 +195,7 @@ contract DSChief is DSRoles, DSChiefApprovals {
     returns (bool)
     {
         //add nhouse token spell cancall role if isValid
-        return (live && who == hat || SR.isValid(who));
+        return (live && who == hat || SR.isAuthSpell(who));
     }
 
     function setRootUser(address who, bool enabled) public {
